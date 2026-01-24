@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/automationProjects/gitHubProjects/seleniumBatch14">
+        <classes>
+            <class name="testngClass1.SauceDemoClassTest">
+                <methods>
+                    <include name="checkTittle"/>
+                    <include name="checkLogoName"/>
+                    <include name="varifyLoginPage"/>
+                    <include name="varifyLoginWithValidCredentials"/>
+                    <include name="varifyLoginWithLockedOutUser"/>
+                </methods>
+            </class>
+            <class name="testngClass1.SauceDemoMethodTest">
+                <methods>
+                    <include name="checkTittle"/>
+                    <include name="checkLogoName"/>
+                    <include name="varifyLoginPage"/>
+                    <include name="varifyLoginWithValidCredentials"/>
+                    <include name="varifyLoginWithLockedOutUser"/>
+                </methods>
+            </class>
+            <class name="testngClass1.SauceDemoTest">
+                <methods>
+                    <include name="checkTittle"/>
+                    <include name="checkLogoName"/>
+                    <include name="varifyLoginPage"/>
+                    <include name="varifyLoginWithValidCredentials"/>
+                    <include name="varifyLoginWithLockedOutUser"/>
+                </methods>
+            </class>
+            <class name="testngClass1.TestCases">
+                <methods>
+                    <include name="firstTestCase1"/>
+                    <include name="firstTestCase2"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
