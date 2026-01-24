@@ -1,0 +1,76 @@
+package testngClass1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class SauceDemoMethodTest {
+    WebDriver driver;
+
+    @BeforeMethod
+    public void browserSetup() {
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--headless");
+
+        driver = new FirefoxDriver(options);
+        driver.manage().window().maximize();
+        driver.get("https://www.saucedemo.com/");
+        driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(30));
+    }
+
+    @AfterMethod
+    public void quiteBrowser() {
+        driver.quit();
+    }
+
+    @Test(description = "Verify the title of the SauceDemo login page")
+    public void checkTittle() {
+        Assert.assertEquals(driver.getTitle(), "Swag Labs");
+    }
+
+    @Test(description = "Verify the logo name on the SauceDemo login page")
+    public void checkLogoName() {
+        String logoName = driver.findElement(By.xpath("//div[@class='login_logo']")).getText();
+        Assert.assertEquals(logoName, "Swag Labs");
+    }
+
+    @Test(description = "Verify the presence of login button on the SauceDemo login page")
+    public void varifyLoginPage() {
+        String idValue = driver.findElement(By.id("login-button")).getAttribute("id");
+        Assert.assertEquals(idValue, "login-button");
+    }
+
+    @Test(description = "Verify login with valid credentials on the SauceDemo login page")
+    public void varifyLoginWithValidCredentials() {
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+
+
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
+
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        String menuText = driver.findElement(By.id("logout_sidebar_link")).getText();
+
+        Assert.assertEquals(menuText, "Logout");
+    }
+
+    @Test(description = "Verify login with valid credentials on the SauceDemo login page")
+    public void varifyLoginWithLockedOutUser() {
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+
+        driver.findElement(By.id("react-burger-menu-btn")).click();
+        String menuText = driver.findElement(By.id("logout_sidebar_link")).getText();
+
+        Assert.assertEquals(menuText, "Logout");
+
+    }
+}
